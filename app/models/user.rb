@@ -29,9 +29,25 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :comments, foreign_key: :author_id  #inverse_of: 'author'
+ 
   has_many :own_photos, foreign_key: :owner_id, class_name: "Photo" #inverse_of: 'owner'
+  
   has_many :recieved_follow_requests, foreign_key: :recipient_id, class_name: "FollowRequest"  #inverse_of: 'recipient'
-  has_many :sent_follow_requests, foreign_key: :sender_id, class_name: "FollowRequest"   #inverse_of: 'sender'
+  has_many :accepted_recieved_follow_requests, -> {where(status: "accepted")}, foreign_key: :recipient_id, class_name: "FollowRequest" 
+ 
   has_many :likes, foreign_key: :fan_id #inverse_of: 'fan'
+
+  has_many :sent_follow_requests, foreign_key: :sender_id, class_name: "FollowRequest"   #inverse_of: 'sender'
+  has_many :accepted_sent_follow_requests, -> {where(status: "accepted")}, foreign_key: :sender_id, class_name: "FollowRequest"   
+
+  has_many :liked_photos, through: :likes, source: :photo
+ 
+  has_many :leaders, through: :accepted_sent_follow_requests, source: :recipient
+ 
+  has_many :followers, through: :accepted_recieved_follow_requests, source: :sender
+
+  has_many :feed, through: :leaders, source: :own_photos
+ 
+  has_many :discover, through: leaders, source: :liked_photos
 
 end
