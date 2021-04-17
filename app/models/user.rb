@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :comments, inverse_of: 'author'
+  has_many :comments, foreign_key: :author_id #inverse_of: 'author'
   has_many :photos, inverse_of: 'owner'
   has_many :follow_requests, inverse_of: 'recipient'
   has_many :follow_requests, inverse_of: 'sender'
