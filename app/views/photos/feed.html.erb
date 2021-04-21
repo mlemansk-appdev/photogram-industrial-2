@@ -4,29 +4,8 @@
       <%= @user.username %>
     </h1>
 
-    <ul class="nav nav-pills nav-justified">
-      <li class="nav-item">
-        <%= link_to "Posts", user_path(@user.username), class: "nav-link" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "Liked Photos", liked_photos_path(@user.username), class: "nav-link" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "Feed", feed_photos_path(@user.username), class: "nav-link" %>
-      </li>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Followers</a>
-      </li> 
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Following</a>
-      </li>
-      </li>    
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-      </li>
-    </ul>
+    <%= render "users/user_tabs"%>
+    
   </div>
 </div>
 
