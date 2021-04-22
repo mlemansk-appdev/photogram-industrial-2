@@ -14,7 +14,7 @@
   <div class="row mb-4">
     <div class="col-md-6 offset-md-3">
       <div class="list-group">
-        <% current_user.leaders.each do |leader| %>
+        <% @user.leaders.each do |leader| %>
           <%= link_to "#{leader.username}", "/#{leader.username}", class: "list-group-item list-group-item-action"%>
         <% end %>
       </div>
