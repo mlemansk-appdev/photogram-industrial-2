@@ -5,11 +5,11 @@
     </h1>
 
     <%= render "users/user_tabs"%>
-
+    
   </div>
 </div>
 
-  <% @user.own_photos.each do |photo| %>
+  <% @user.feed.each do |photo| %>
     <%= render "photos/photo", photo: photo%>
   <% end %>
 
